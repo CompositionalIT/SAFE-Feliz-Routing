@@ -1,53 +1,13 @@
-# SAFE Template
+# Feliz Routing
 
-This template can be used to generate a full-stack web application using the [SAFE Stack](https://safe-stack.github.io/). It was created using the dotnet [SAFE Template](https://safe-stack.github.io/docs/template-overview/). If you want to learn more about the template why not start with the [quick start](https://safe-stack.github.io/docs/quickstart/) guide?
+This is an example of Feliz Router in a SAFE V4.1.1 app, which requires .NET 6 and node.js 16.
 
-## Install pre-requisites
+The template Todo app module has been duplicated and renamed as 'Page1' and 'Page2', and these pages have had their HTML header labels updated to reflect this.
 
-You'll need to install the following pre-requisites in order to build SAFE applications
+The Index module now contains the logic needed to monitor for URL changes, parse the segments and use them to render a page.
 
-* [.NET Core SDK](https://www.microsoft.com/net/download) 6.0 or higher
-* [Node 16](https://nodejs.org/en/download/)
+Page 1 is the default so can be accessed at the root or `/page1`.
 
-## Starting the application
+Page 2 can be found at `/page2` and any other route will show a Not Found page.
 
-Before you run the project **for the first time only** you must install dotnet "local tools" with this command:
-
-```bash
-dotnet tool restore
-```
-
-To concurrently run the server and the client components in watch mode use the following command:
-
-```bash
-dotnet run
-```
-
-Then open `http://localhost:8080` in your browser.
-
-The build project in root directory contains a couple of different build targets. You can specify them after `--` (target name is case-insensitive).
-
-To run concurrently server and client tests in watch mode (you can run this command in parallel to the previous one in new terminal):
-
-```bash
-dotnet run -- RunTests
-```
-
-Client tests are available under `http://localhost:8081` in your browser and server tests are running in watch mode in console.
-
-Finally, there are `Bundle` and `Azure` targets that you can use to package your app and deploy to Azure, respectively:
-
-```bash
-dotnet run -- Bundle
-dotnet run -- Azure
-```
-
-## SAFE Stack Documentation
-
-If you want to know more about the full Azure Stack and all of it's components (including Azure) visit the official [SAFE documentation](https://safe-stack.github.io/docs/).
-
-You will find more documentation about the used F# components at the following places:
-
-* [Saturn](https://saturnframework.org/)
-* [Fable](https://fable.io/docs/)
-* [Elmish](https://elmish.github.io/elmish/)
+As usual, start the app by running `dotnet tool restore` (the first time only) and then `dotnet run` at the solution root.
