@@ -30,21 +30,18 @@ let tryParseUrl = function
     | _ -> None
 
 let initPage url =
-    let show page = { CurrentUrl = url; CurrentPage = page; }
     match url with
     | Some Url.Page1 ->
         let page1Model, page1Msg = Page1.init ()
-        show (Page.Page1 page1Model), page1Msg |> Cmd.map Page1Msg
+        { CurrentUrl = url; CurrentPage = (Page.Page1 page1Model) }, page1Msg |> Cmd.map Page1Msg
     | Some Url.Page2 ->
         let page2Model, page2Msg = Page2.init ()
-        show (Page.Page2 page2Model), page2Msg |> Cmd.map Page2Msg
+        { CurrentUrl = url; CurrentPage = (Page.Page2 page2Model) }, page2Msg |> Cmd.map Page2Msg
     | None ->
-        show Page.NotFound, Cmd.none
+        { CurrentUrl = url; CurrentPage = Page.NotFound }, Cmd.none
 
 let init () : Model * Cmd<Msg> =
-    let url = Router.currentPath()
-    Browser.Dom.console.log $"Initial URL:  %A{url}"
-    url
+    Router.currentPath()
     |> tryParseUrl
     |> initPage
 
@@ -57,7 +54,6 @@ let update (msg: Msg) (model: Model) : Model * Cmd<Msg> =
         let newPage2Model, newPage2Msg = Page2.update page2Msg page2Model
         { model with CurrentPage = Page.Page2 newPage2Model }, newPage2Msg |> Cmd.map Page2Msg
     | UrlChanged urlSegments, _ ->
-        Browser.Dom.console.log $"Changing to %A{urlSegments}"
         initPage urlSegments
     | _ ->
         model, Cmd.none
